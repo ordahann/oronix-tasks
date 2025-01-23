@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="logo and favicon/ORONIXTASKS-FAVICON.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ORONIX TASKS</title>
+  </head>
+  <body>
+    <header>
+      <!-- Navigation bar -->
+      <nav class="navbar">
+        <div class="navbar-container">
+          <div id="arrow-back" class="navbar-arrow-back">&larr;</div>
+          
+          <h2 class="centered-title headers">This month tasks overview</h2>
+          
+          <div class="navbar-title">
+            <img src="logo and favicon/ORONIXTASKS-LOGO.png" alt="ORONIX TASKS LONG" class="navbar-logo">
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Home screen -->
+      <section class="section-home">
+
+        <div class="task-type-grid">
+          <!-- Completed tasks -->
+          <div class="task-type completed" data-type="completed">
+            <h3>Completed Tasks</h3>
+            
+            <p id="task-count-completed">0 Tasks</p>
+            <p id="completed-30-days">* The last 30 days</p>
+          </div>
+
+          <!-- All tasks -->
+          <div class="task-type all-tasks" data-type="all">
+            <h3>All Tasks</h3>
+            
+            <p id="task-count-all">0 Tasks</p>
+          </div>
+          
+          <!-- Low status -->
+          <div class="task-type low-status" data-type="low">
+            <h3>Low status</h3>
+            
+            <p id="task-count-low">0 Tasks</p>
+          </div>
+          
+          <!-- Moderate status -->
+          <div class="task-type moderate-status" data-type="moderate">
+            <h3>Moderate status</h3>
+            
+            <p id="task-count-moderate">0 Tasks</p>
+          </div>
+          
+          <!-- High status -->
+          <div class="task-type high-status" data-type="high">
+            <h3>High status</h3>
+            
+            <p id="task-count-high">0 Tasks</p>
+          </div>
+        </div>
+        
+        <!-- Calendar and Add/Edit task section -->
+        <section class="calendar-task-wrapper">
+          <!-- Calendar -->
+          <div class="calendar-container">
+            <h3 class="centered-title headers">Task Calendar</h3>
+            
+            <!-- Calendar navigation -->
+            <div class="calendar-navigation">
+              <!-- Prev month button -->
+              <div class="headers" id="prev-month">&larr;</div>
+              
+              <!-- Year and month selection -->
+              <div class="calendar-selectors headers">
+                <select id="select-month"></select>
+                <select id="select-year"></select>
+              </div>
+              
+              <!-- Next month button -->
+              <div class="headers" id="next-month">&rarr;</div>
+            </div>
+
+            <!-- Calendar days header -->
+            <div class="headers" id="calendar-header">
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
+            </div>
+            
+            <div id="task-calendar"></div>
+          </div>
+
+          <!-- Today's tasks -->
+          <div class="today-task-list-container">
+            <h3 class="centered-title headers">Tasks Due Today</h3>
+            
+            <!-- The list of the tasks -->
+            <ul id="today-task-list"></ul>
+          </div>
+        </section>
+
+        <!-- Add task button -->
+        <button id="button-add" class="button-add">+</button>
+      </section>
+
+      <!-- Task by type view -->
+      <section class="section-view" style="display: none;">
+        <!-- The list of the tasks by type -->
+        <ul id="tasks-list" class="centered-container"></ul>
+      </section>
+
+      <!-- Add/Edit fForm -->
+      <section class="section-add-edit" style="display: none;">
+        <!-- Add Task Header -->
+        <h2 class="centered-title form-create-mode headers">Add a Task</h2>
+        <!-- Edit Task Header -->
+        <h2 class="centered-title form-edit-mode headers">Edit Task</h2>
+        
+        <!-- Task data -->
+        <div id="task-inputs" class="centered-container">
+          <form id="form">
+            <input id="task-id" type="hidden" />
+            
+            <!-- Task name -->
+            <div class="form-group">
+              <label for="task-name" class="form-label headers">Task Name:</label>
+              
+              <input id="task-name" type="text" class="input-text"/>
+              
+              <div id="input-error-name" class="input-error">Fill The Name!</div>
+            </div>
+            
+            <!-- Task deadline -->
+            <div class="form-group">
+              <label for="task-deadline" class="form-label headers">Deadline:</label>
+              
+              <div class="select-date-group">
+                <select id="task-day" class="input-text select-date"></select>
+                <select id="task-month" class="input-text select-date"></select>
+                <select id="task-year" class="input-text select-date"></select>
+              </div>
+              
+              <div id="input-error-deadline" class="input-error">Select a Valid Date!</div>
+            </div>
+            
+            <!-- Task description -->
+            <div class="form-group">
+              <label for="task-description" class="form-label headers">Description:</label>
+              
+              <textarea id="task-description" class="input-text input-textarea"></textarea>
+              
+              <div id="input-error-description" class="input-error">Fill The Description!</div>
+            </div>
+            
+            <!-- Task status -->
+            <div class="form-group">
+              <label for="task-status" class="form-label headers">status:</label>
+              
+              <select id="task-status" class="input-text">
+                <option value="">Select</option>
+                <option value="Low">Low</option>
+                <option value="Moderate">Moderate</option>
+                <option value="High">High</option>
+              </select>
+
+              <div id="input-error-status" class="input-error">Select a status!</div>
+            </div>
+            
+            <!-- CRUD Butttons - Create, Read, Update and Delete -->
+            <div class="button-group crud-buttons">
+              <!-- Create task button -->
+              <button id="button-create" class="button button-create form-create-mode">Create</button>
+              <!-- Save task changes button  -->
+              <button id="button-save" class="button button-save form-edit-mode">Save Changes</button>
+              <!-- Delete task button -->
+              <button id="button-delete" class="button button-delete form-edit-mode">Delete</button>
+            </div>
+
+            <!-- Delete confirmation -->
+            <div class="button-group confirmation-delete" style="display: none;">
+              <div class="confirmation-delete-message">
+                <strong>Delete The Current Task?</strong>
+              </div>
+              
+              <button id="button-confirm-yes" class="button button-delete">
+                Yes
+              </button>
+              
+              <button id="button-confirm-no" class="button button-create">
+                No
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <div id="notifications" class="notifications"></div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+  <footer>
+    <section class="section-bottom-page">
+      <div id="bottom-page">
+        <p id="footer-title">
+          Ⓒ ORONIX TASKS 2025
+        </p>
+      </div>
+    </section>
+  </footer>
+</html>
