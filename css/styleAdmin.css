@@ -1,0 +1,136 @@
+/* General styling for the page */
+body {
+    height: calc(100% - 300px);
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+    background-color: #fff0f3;
+    font-family: Arial, sans-serif;
+}
+
+#hello {
+    color: #3d0d17;
+    font-size: 50px;
+    margin: 50px;
+    font-weight: bolder;
+}
+
+#logout {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+  
+#loginBtn {
+    width: 40%;
+    margin: 60px;
+    background-color: #3d0d17;
+    color: #ff8fa3;
+    font-weight: bold;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+  
+#loginBtn:hover {
+    color: #3d0d17;
+    background-color: #ff8fa3;
+}
+
+/* Style the container */
+#users-list {
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 1000px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the table */
+#users-list table {
+    width: 70%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Style the table header */
+#users-list table thead {
+    background-color: #3d0d17;
+    color: #fff0f3;
+}
+
+#users-list table thead th {
+    padding: 12px 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Style the table rows */
+#users-list table tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+}
+
+#users-list table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Style table cells */
+#users-list table td, #user-list table th {
+    padding: 12px 15px;
+}
+
+/* Style alternate row colors */
+#users-list table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+#users-list table tbody tr:nth-child(even) {
+    background-color: #fff0f3;
+}
+
+/* Style for mobile screens */
+@media (max-width: 768px) {
+    #users-list table {
+        font-size: 14px;
+    }
+
+    #users-list table thead {
+        display: none;
+    }
+
+    #users-list table tbody tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    #users-list table tbody tr td {
+        display: block;
+        text-align: right;
+        padding: 10px;
+        position: relative;
+    }
+
+    #users-list table tbody tr td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        position: absolute;
+        left: 10px;
+        text-align: left;
+    }
+}

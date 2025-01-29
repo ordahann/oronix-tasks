@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" href="../logo and favicon/ORONIXTASKS-FAVICON.png" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="../css/styleHomePage.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ORONIX TASKS</title>
+    </head>
+    <body>
+        <div id="home-img">
+            <img src="https://oronix-tasks.s3.us-east-1.amazonaws.com/logo and favicon/ORONIXTASKS-LOGO.png" alt="ORONIX TASKS LONG" class="navbar-logo">
+        </div>
+        
+        <!-- <div id="welcome">
+            Welcome!
+        </div> -->
+
+        <button id="loginBtn">
+            log in 
+        </button>
+    </body>
+
+    <script>
+        const login = () => {
+            window.location.href = "https://us-east-18l0yhjuvi.auth.us-east-1.amazoncognito.com/login/continue?client_id=1sq2nn3l5mdi0jc3qrqtu2311c&redirect_uri=http%3A%2F%2Flocalhost%3A5500&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";
+        }
+
+        const loginOperate = () => {
+       
+            const loginBtn = document.getElementById("loginBtn");
+
+            loginBtn.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                window.location.href = "https://us-east-18l0yhjuvi.auth.us-east-1.amazoncognito.com/login/continue?client_id=1sq2nn3l5mdi0jc3qrqtu2311c&redirect_uri=https%3A%2F%2Foronix-tasks.s3.us-east-1.amazonaws.com%2Findex.html&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile";
+            })
+        }
+
+        const checkParameters = () => {
+            const urlParams = new URLSearchParams(window.location.hash.substring(1));
+            if (urlParams.size != 0) {
+                sessionStorage.setItem("tokenId", urlParams.get("id_token"));
+                window.location.href = HomePageUrl;
+            }
+        }
+
+        // Push the current page into the history stack
+        history.pushState(null, "", window.location.href);
+
+        // Handle back/forward navigation
+        window.onpopstate = () => {
+            console.log("Back button detected! Redirecting...");
+            window.location.href = homePageURL; // Replace with your actual homepage URL
+        };
+        
+        window.onload = () => {
+            checkParameters();
+            loginOperate();
+        }
+
+    </script>
+</html>

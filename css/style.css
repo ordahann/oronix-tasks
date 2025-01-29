@@ -100,7 +100,7 @@ body {
   flex-direction: column;
   overflow: hidden;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
   background-color: var(--body-background);
 }
 
@@ -131,14 +131,41 @@ main {
   background-color: var(--bottom-top-sections-background-color);
 }
 
+#logout {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#loginBtn {
+  width: 110px;
+  background-color: var(--pink-11);
+  color: var(--pink-4);
+  font-weight: bold;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#loginBtn:hover {
+  color: var(--pink-11);
+  background-color: var(--pink-4);
+}
+
 .navbar-container {
   text-align: center;
   padding: 10px;
-  width: 100%;
+  width: calc(100% - 210px);
   display: flex;
   justify-content: center;
   flex-direction: column-reverse;
   align-items: center;
+  margin-left: 180px;
 }
 
 .navbar-container h2 {
@@ -370,14 +397,14 @@ main {
 }
 /* Calendar */
 .calendar-container {
-  width: 33%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin-left: 2px;
   margin-right: 10px;
   margin-top: 20px;
-  max-height: 615px;
+  max-height: 760px;
   min-height: 560px;
   height: auto;
 }
@@ -467,11 +494,11 @@ main {
 
 /* Today's tasks list */
 .today-task-list-container {
-  width: 55%;
+  width: 48%;
   margin-right: 2px;
   margin-left: 10px;
   margin-top: 20px;
-  max-height: 615px;
+  max-height: 760px;
   flex: 1;
   border-radius: var(--border-radius);
   overflow-y: auto; 
@@ -533,7 +560,6 @@ main {
 /* Add/Edit task section */
 .section-add-edit {
   width: 90%;
-  /* max-height: calc(100% - 80px); */
   margin-top: 80px;
   margin: 10px auto;
   padding: 10px;
@@ -765,5 +791,133 @@ li.task-item.task-status-completed {
   }
   to {
     opacity: 0;
+  }
+}
+
+
+/* Media queries for tablets and smaller devices (768px and smaller) */
+@media (max-width: 768px) {
+  .calendar-task-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .calendar-container,
+  .today-task-list-container {
+    width: 100%; 
+    margin: 0 auto; 
+    padding: 15px; 
+    height: 660px;
+  }
+
+  #task-calendar {
+    gap: 8px; 
+  }
+
+  .calendar-day {
+    font-size: 14px;
+  }
+
+  #today-task-list li {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .task-type-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .task-type {
+    width: 60%; 
+    height: auto;
+  }
+}
+
+/* Media queries for small mobile screens (480px and smaller) */
+@media (max-width: 480px) {
+  .calendar-container,
+  .today-task-list-container {
+    padding: 10px;
+  }
+
+  #task-calendar {
+    gap: 5px; 
+  }
+
+  .calendar-day {
+    font-size: 12px;
+  }
+
+  #today-task-list li {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+/* Medium screens (between 768px and 1199px) */
+@media (max-width: 1199px) and (min-width: 769px) {
+  .calendar-task-wrapper {
+    flex-direction: row;
+    gap: 15px; 
+  }
+
+  .calendar-container,
+  .today-task-list-container {
+    width: 47%;
+    padding: 15px;
+    height: 560px;
+  }
+
+  #task-calendar {
+    gap: 10px; 
+  }
+
+  .calendar-day {
+    font-size: 14px;
+  }
+
+  #today-task-list li {
+    font-size: 14px;
+    padding: 12px; 
+  }
+
+  .task-type-grid {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .task-type {
+    width: calc(50% - 15px); 
+    height: 140px; 
+  }
+}
+
+/* Large screens (1200px and above) */
+@media (min-width: 1200px) {
+  .calendar-task-wrapper {
+    flex-direction: row;
+    gap: 20px; 
+  }
+
+  .calendar-container,
+  .today-task-list-container {
+    width: 48%;
+    padding: 20px;
+    height: 760px;
+  }
+
+  #task-calendar {
+    gap: 15px;
+  }
+
+  .calendar-day {
+    font-size: 16px;
+  }
+
+  #today-task-list li {
+    font-size: 16px;
+    padding: 15px; 
   }
 }

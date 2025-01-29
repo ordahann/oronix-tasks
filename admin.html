@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="../logo and favicon/ORONIXTASKS-FAVICON.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ORONIX TASKS</title>
+</head>
+<body>
+
+    <div class="navbar-container">
+        <div class="navbar-title">
+            <img src="logo and favicon/ORONIXTASKS-LOGO.png" alt="ORONIX TASKS LONG" class="navbar-logo">
+        </div>
+    </div>
+    <div id="logout">
+        <button id="loginBtn">
+            Log Out
+        </button>
+    </div>
+    <div id="hello">
+        Hello admin
+    </div>
+    <div id="users-list">
+
+    </div>
+    <script>
+        const frontPageUrl = "https://oronix-tasks.s3.us-east-1.amazonaws.com/homePage.html";
+        
+        const loginBtn = document.getElementById("loginBtn");
+
+        loginBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            sessionStorage.clear();
+
+            window.location.href = frontPageUrl;
+        });
+
+        window.onload = async () => {
+            if (!document.getElementById("users-list")) {
+                console.error("Error: 'user-list' div is missing in the DOM.");
+                return;
+            }
+
+            await displayUsers();
+        };
+
+        const displayUsers = async () => {
+            const adminToken = sessionStorage.getItem("tokenId");
+
+            if (!adminToken) {
+                alert("Unauthorized access. Please log in as an admin.");
+                window.location.href = homePageURL; // Redirect to homepage
+                return;
+            }
+
+            const users = await fetchUsers(adminToken);
+
+            if (users && users.length > 0) {
+                renderUsersTable(users);
+            } else {
+                const container = document.getElementById("user-list");
+                if (container) {
+                    container.innerHTML = "<p>No users found.</p>";
+                }
+            }
+        };
+
+        const fetchUsers = async (token) => {
+            try {
+                const response = await fetch("https://88s5rw95le.execute-api.us-east-1.amazonaws.com/Prod/admin/users", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": token, // Admin token in the Authorization header
+                        "Content-Type": "application/json"
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json(); // Parse the JSON response
+                console.log("Users API Response:", result);
+
+                // Extract the `data` array directly
+                return result.data || [];
+            } catch (error) {
+                console.error("Error fetching users data:", error);
+                return [];
+            }
+        };
+
+        const renderUsersTable = (users) => {
+            const tableContainer = document.getElementById("users-list");
+
+            if (!tableContainer) {
+                console.error("Error: 'user-list' div not found in the DOM.");
+                return;
+            }
+
+            let tableHTML = `
+                <table border="1" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            users.forEach((user) => {
+                tableHTML += `
+                    <tr>
+                        <td>${user.userId}</td>
+                        <td>${user.email}</td>
+                        <td>${user.name}</td>
+                        <td>${user.status}</td>
+                        <td>${user.createdAt}</td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+
+            tableContainer.innerHTML = tableHTML;
+        };
+
+    </script>
+</body>
+</html>
